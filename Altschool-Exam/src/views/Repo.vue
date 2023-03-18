@@ -67,7 +67,7 @@ export default {
     // fetch data from api
     const fetchRepo = async () => {
       const response = await axios.get(
-        `https://api.github.com/repos/chisom6924536/${id}`
+        `https://api.github.com/repos/chisom-odo/${id}`
       );
       state.repo = response.data;
       console.log(response.data);
