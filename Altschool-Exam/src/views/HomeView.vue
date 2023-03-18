@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper">
+
+    <!-- Home Section -->
     <section class="hero-wrapper">
       <div class="hero">
         <div class="home-title">
@@ -12,7 +14,7 @@
           ago. The experience has been mind-blowing but at the same time
           challenging. Sometimes i feel like banging my head around the wall
           while sometimes i feel like superhero especially when i get to fix a
-          bug that has been given a headache. I am recently told to do a
+          bug that has been given a headache. I was recently told to do a
           project. I hope you love it.
         </p>
       </div>
@@ -50,7 +52,6 @@ export default {
   font-size: 2rem;
   font-size: clamp(2rem, 0.599rem + 6.4vw, 3rem);
   width: 299px;
-  /* border: 1px solid red; */
   margin-bottom: var(--fs-24);
 }
 
@@ -89,12 +90,10 @@ export default {
       display: flex;
       flex-direction: row;
       
-      /* border:1px solid red; */
 
     }
   .hero{
     width: 50%;
-    /* max-width:531px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,7 +105,6 @@ export default {
   .hero-image{
     display: flex;
     flex: 1 0 50%;
-    /* border:1px solid red */
   }
   
 }

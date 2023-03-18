@@ -2,6 +2,7 @@
   <!-- Loading state -->
   <div v-if="loading"><p>loading...</p></div>
   <div v-else class="wrapper">
+    <!--  Card Container -->
     <div class="card-container">
       <div class="card">
       <div class="card-title">
@@ -36,6 +37,30 @@
       </div>
     </div>
       </div>
+      <!-- Pagination -->
+      <div class="pagination">
+        <button
+          v-on:click="setCurrentPage(currentPage - 1)"
+          :disabled="currentPage === 1"
+        >
+          Previous
+        </button>
+        <button
+          v-for="page in pageCount"
+          :key="page"
+          v-on:click="setCurrentPage(page)"
+          :class="{ active: page === currentPage }"
+        >
+          {{ page }}
+        </button>
+        >
+        <button
+          v-on:click="setCurrentPage(currentPage + 1)"
+          :disabled="currentPage === pageCount"
+        >
+          Next
+        </button>
+      </div>
   
     </div>
     </div>
@@ -44,29 +69,6 @@
 
     <!-- Pagination -->
     
-    <div class="pagination">
-      <button
-        v-on:click="setCurrentPage(currentPage - 1)"
-        :disabled="currentPage === 1"
-      >
-        Previous
-      </button>
-      <button
-        v-for="page in pageCount"
-        :key="page"
-        v-on:click="setCurrentPage(page)"
-        :class="{ active: page === currentPage }"
-      >
-        {{ page }}
-      </button>
-      >
-      <button
-        v-on:click="setCurrentPage(currentPage + 1)"
-        :disabled="currentPage === pageCount"
-      >
-        Next
-      </button>
-    </div>
   </div>
 </template>
 
@@ -222,21 +224,24 @@ export default {
   #card-list{
     display: flex;
     flex-direction:column;
-    /* align-items: center; */
-    border: 1px solid red;
+    gap:16px;
     margin-bottom:1.5rem;
-    flex-wrap:wrap;
+    justify-content: center;
 
 
   }
 
   .repo-name {
+    display: flex;
+    white-space: nowrap;
+    flex:1 0 auto;
     font-family: "Montserrat", sans-serif;
-    font-size: 1.125rem;
-    font-size: clamp(1.125rem, 0.5249rem + 1.6vw, 1.125rem);
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.5249rem + 1.6vw, 1rem);
     line-height: 159.9%;
     color:var(--text-color
     );
+
     font-weight: var(--fw-regular);
   }
 
@@ -247,8 +252,10 @@ export default {
     flex-direction: column;
     justify-content: center;
     gap:16px;
-    border:1px solid red;
+    border:3px solid var(--accent);
+    border-radius:8px;
     padding:20px;
+    max-width:400px;
     height:100%;
   }
 
@@ -262,7 +269,6 @@ export default {
     font-weight: var(--fw-semibold);
   }
 
-  /* Styling the pagination component */
   /* Styling buttons */
   button.view{
     background-color:var(--accent);
@@ -270,7 +276,6 @@ export default {
     border: none;
     border-radius: 32px;
     padding: 0.6rem 1rem;
-    /* margin: 0 auto; */
     margin-bottom:16px;
     font-size: 1rem;
     font-weight: var(--fw-semibold);
@@ -286,11 +291,24 @@ export default {
   /* Styling the pagination container */
   .pagination {
     display: flex;
-    justify-content: center;
+    justify-content:left;
     align-items: center;
     margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
-
+  .pagination button {
+    background-color: var(--bg-card);
+    color: var(--text-color);
+    border: none;
+    border-radius: 32px;
+    padding: 0.4rem 0.3rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    
+  }
   /* Styling the active page */
   .pagination .active {
     background-color: var(--accent);
@@ -298,18 +316,39 @@ export default {
     border: none;
    
   }
+  /* Styling the disabled button */
+
+  .pagination .disabled {
+    background-color: var(--bg-card);
+    color: var(--text-color);
+    border: none;
+    cursor: not-allowed;
+  }
+
+  /* Styling the hover effect */
+  .pagination button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-card);
+  }
+
+
 /* Styling Media Queries */
 
-  @media screen and (min-width: 511px ) {
+  @media screen and (min-width: 600px ) {
     #card-list{
       display:grid;
+      justify-content: center;
       grid-template-columns: repeat(2, 1fr);
-      grid-auto-flow: dense;
-      grid-gap: 1rem;
+      grid-gap: 16px;
+      width:100%;
     }
     .repo-details{
       width:100%;
 
+    }
+    .pagination button{
+      padding: 0.6rem 1rem;
+      
     }
   }
 
@@ -317,8 +356,8 @@ export default {
     #card-list{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-flow: dense;
-      grid-gap: 1rem;
+      grid-gap:16px;
+      margin: auto;
     }
     .repo-details{
       width:100%;

@@ -32,6 +32,20 @@
           moment(repo.pushed_at).format("ddd MMM DD, YYYY [at] HH:mm")
         }}</span>
       </h3>
+
+      <div class="btn-repo">
+        <button class="btn-github">
+          <a :href="repo.html_url" target="_blank">View on Github</a>
+        </button>
+        <RouterLink to="/repolist">
+          <button class="btn-repolist">
+            <a :href="repo.homepage" target="_blank" >Back to repolist</a>
+          </button>
+        </RouterLink>
+
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -42,12 +56,11 @@ import { reactive, onMounted } from "vue";
 import moment from "moment";
 import axios from "axios";
 import { toRefs } from "vue";
+import { RouterLink } from "vue-router";
 export default {
   name: "Repo",
   data() {
-    return {
-    
-    };
+    return {};
   },
   // function to format date
   created() {
@@ -73,7 +86,7 @@ export default {
       console.log(response.data);
     };
 
- // fetch data on page load
+    // fetch data on page load
     onMounted(() => {
       fetchRepo();
     });
@@ -84,3 +97,76 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.repo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #f1f7fe;
+  border-radius: 10px;
+  border: 5px solid #e0eeff;
+  margin: 30px auto;
+}
+
+.repo-details {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: var(--fs-16);
+  gap: 16px;
+  background-color: #e0eeff;
+  border-radius: 10px;
+  font-family: "Montserrat", sans-serif;
+  line-height: 166%;
+}
+
+h3 {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-16);
+  color: var(--accent);
+}
+
+.s {
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-16);
+  color: var(--text-color);
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-14);
+  cursor: pointer;
+}
+
+.btn-repolist {
+  background-color: var(--accent);
+  color:var(--text-color);
+  margin-top: 16px;
+}
+
+.btn-github {
+  background-color: var(--text-color);
+  color: var(--accent);
+  margin-top: 16px;
+  border: 1px solid var(--accent);
+}
+
+.btn-repo{
+  margin-top:10px;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+</style>

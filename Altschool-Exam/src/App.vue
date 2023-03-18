@@ -102,7 +102,7 @@ img{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: var(--fs-13) 0;
+  padding: var(--fs-13) 0; 
   background-color: var(--bg-body);
   font-family: "Montserrat", sans-serif;
   width: 100%;
@@ -132,6 +132,25 @@ a {
 .logo span {
   color: var(--accent);
 }
+
+/* 
+/* Styling the active link */
+.nav-items li a.active {
+  color: var(--accent);
+  font-weight:var(--fw-semibold)
+}
+
+/* Styling the hover link */
+.nav-items li a:hover {
+  color: var(--text-color);
+  font-weight:var(--fw-semibold);
+} 
+
+
+
+
+
+
 
 
 </style>
